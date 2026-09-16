@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     Platform,
+    Alert,
 } from "react-native";
 
 import AppInput from "../src/components/AppInput";
@@ -17,6 +18,15 @@ export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+
+    async function handleRegister() {
+        if (!email.trim() || !password.trim() || !confirm.trim())
+            return Alert.alert('Atenção', 'Preecha todos os campos.');
+        if(password.length<6)
+            return Alert.alert('A senha precisa ter no mínimo 6 caracteres.');
+        if(password==confirm)
+            return Alert.alert('Atenção', 'As senhas não conferem.');
+    };
 
     return (
         <KeyboardAvoidingView
@@ -58,6 +68,7 @@ export default function Register() {
                 <AppButton
                     title="Criar conta"
                     loading={loading}
+                    onPress={handleRegister}
                 />
 
                 <TouchableOpacity
