@@ -3,7 +3,7 @@ import { COLORS, RADIUS, SPACING } from '../constants/theme';
 
 export default function AppInput(
     {label, error, ...props}
-) {
+) { 
     return (
         <View style={styles.container}>
             {label && <Text style={styles.label}> {label} </Text>}

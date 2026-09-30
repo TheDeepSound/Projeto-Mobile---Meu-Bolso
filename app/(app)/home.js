@@ -1,9 +1,10 @@
-import { Text, View } from 'expo-router';
+import React from "react";
+import { View, Text } from "react-native";
 
-export default  function Home(){
-  return (
-    <View>
-        <Text>Estou na home</Text>
-    </View>
-  )
+export default function Home() {
+    return (
+        <View>
+            <Text>Estou na home</Text>
+        </View>
+    );
 }

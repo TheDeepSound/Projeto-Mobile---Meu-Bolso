@@ -19,8 +19,8 @@ export default function Login() {
 
     async function handleLogin(){
         if(!email.trim()||!password.trim()){
-            Alert.alert('Atenção', 'Informe e-mail e senha');
-            Alert.alert('Atenção', 'Informe e-mail e senha');
+            Alert.alert('Atenção', 'Informe e-mail e senha'),
+            console.log('Atenção', 'Informe e-mail e senha');
             return;
         }
         try{
@@ -31,6 +31,7 @@ export default function Login() {
                 console.log('Erro', error.message);
                 return;
             }
+            router.replace('./(app)/home')
         }finally{
             setLoading(false);
         }
