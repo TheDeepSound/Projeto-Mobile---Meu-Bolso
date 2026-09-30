@@ -12,11 +12,13 @@ import {
 import AppInput from "../src/components/AppInput";
 import AppButton from "../src/components/AppButton";
 import { router } from "expo-router";
+import { signUp } from "../src/services/authService";
 
 export default function Register() {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirm, setConfirm] = useState("");
     const [loading, setLoading] = useState(false);
 
     async function handleRegister() {
@@ -24,8 +26,24 @@ export default function Register() {
             return Alert.alert('Atenção', 'Preecha todos os campos.');
         if(password.length<6)
             return Alert.alert('A senha precisa ter no mínimo 6 caracteres.');
-        if(password==confirm)
+        if(password!==confirm)
             return Alert.alert('Atenção', 'As senhas não conferem.');
+
+        try{
+            setLoading(true);
+            const {error} = await signUp(email.trim(), password);
+
+            if(error){Alert.alert('Erro no cadastro', error.message),
+            console.log('Erro no cadastro', error.message);
+            return;
+            } else {
+                Alert.alert('Sucesso!', 'Conta criada com sucesso, Faça o login para continuar.')
+                router.replace('/');
+            }
+
+        }finally{
+            setLoading(false);
+        }
     };
 
     return (
@@ -64,6 +82,15 @@ export default function Register() {
                     value={password}
                     onChangeText={setPassword}
                 />
+
+                <AppInput
+                    label="Confirmar senha"
+                    placeholder="******"
+                    secureTextEntry
+                    value={confirm}
+                    onChangeText={setConfirm}
+                />
+
 
                 <AppButton
                     title="Criar conta"

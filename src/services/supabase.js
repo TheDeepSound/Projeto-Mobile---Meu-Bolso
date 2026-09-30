@@ -32,6 +32,7 @@ const CustomStorage = {
 };
 const url = process.env.EXPO_PUBLIC_SUPABASE_URL;
 const key = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
 export const supabase = createClient(url, key, {
  auth: {
  storage: CustomStorage, // Utiliza o armazenamento inteligente dependendo da plataforma
